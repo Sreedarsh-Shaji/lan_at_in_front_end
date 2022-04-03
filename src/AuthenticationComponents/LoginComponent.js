@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 
 import AdminLogin from './AdminLogin';
-import UserLogin from './UserLogin';
-import AgencyLogin from './AgencyLogin';
+import CandidateLogin from './CandidateLogin';
+import CompanyLogin from './CompanyLogin';
+import RecruiterLogin from './RecruiterLogin';
 import FooterComponent from './FooterComponent';
 import Header from '../LandingPage/Header';
 
@@ -45,7 +46,7 @@ class LoginComponent extends Component {
                     <div></div>
                     <div className="row">
                         <div className="col-md-7">
-                            <img src="https://3p6y693soagg24ij033i3rcg-wpengine.netdna-ssl.com/wp-content/uploads/2020/04/541072.jpg" alt="Kia car" />
+                            <img src="https://media.istockphoto.com/vectors/man-working-on-the-internet-on-a-light-background-vector-id1025033348?k=20&m=1025033348&s=612x612&w=0&h=noBXUFqaUhWOCeKg1ekFZ9qHhKvwmFSt0ctITPNNy1w=" height="450px" alt="Kia car" />
                         </div>
                         <div className="col-md-5">
 
@@ -55,15 +56,31 @@ class LoginComponent extends Component {
                                     onClick={() => this.userSelect("Admin")}/> 
                                     Admin
                                 </label>
+                               
+                                <label className="btn btn-primary" style={{ width:"110px" }}>
+                                    <input type="radio" name="options" id="option3" style={{ width:"100%" }} 
+                                    onClick={() => this.userSelect("Candidate")}/> 
+                                    Job Seeker
+                                </label>
+                                
+                                <label className="btn btn-primary" style={{ width:"110px" }}>
+                                    <input type="radio" name="options" id="option3" style={{ width:"100%" }} 
+                                    onClick={() => this.userSelect("Student")}/> 
+                                    Student
+                                </label>
+                            </div>
+                            <hr/>
+                            <div className="btn-group btn-group-toggle" data-toggle="buttons">
                                 <label className="btn btn-primary" style={{ width:"110px" }}>
                                     <input type="radio" name="options" id="option2"
-                                    onClick={() => this.userSelect("Agency")}/> 
-                                    Agency
+                                    onClick={() => this.userSelect("Company")}/> 
+                                    Company
                                 </label>
-                                <label className="btn btn-primary" style={{ width:"65px" }}>
+                                
+                                <label className="btn btn-primary" style={{ width:"110px" }}>
                                     <input type="radio" name="options" id="option3" style={{ width:"100%" }} 
-                                    onClick={() => this.userSelect("User")}/> 
-                                    User
+                                    onClick={() => this.userSelect("Recruiter")}/> 
+                                    Recruiter
                                 </label>
                             </div>
 
@@ -72,8 +89,10 @@ class LoginComponent extends Component {
                             <br />
 
                             {this.state.usertype === "Admin" && <AdminLogin />}
-                            {this.state.usertype === "Agency" && <AgencyLogin />}
-                            {this.state.usertype === "User" && <UserLogin />}
+                            {this.state.usertype === "Company" && <CompanyLogin />}
+                            {this.state.usertype === "Candidate" && <CandidateLogin />}
+                            {this.state.usertype === "Recruiter" && <RecruiterLogin /> }
+                            {this.state.usertype === "Student" && <RecruiterLogin /> }
 
                         </div>
                     </div>

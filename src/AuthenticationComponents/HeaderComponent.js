@@ -8,7 +8,7 @@ class HeaderComponent extends Component{
         return(
             <header>
                <nav className="navbar navbar-expand-md navbar-dark bg-dark">
-                    <div><span className="navbar-brand">Lan@in</span></div>
+                    <div><span className="navbar-brand">Lan@.in</span></div>
                     <ul className="navbar-nav">
                      
                     </ul>

@@ -3,18 +3,15 @@ import AuthenticationDataService from "./AuthenticationDataService"
 import AuthenticationService from './AuthenticationService';
 import { withRouter } from 'react-router';
 
-class AgencyLogin extends Component {
-  
-    
-    
 
+
+class CandidateLogin extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
             username: '',
             password: '',
-            error: false,
         }
 
         this.onSubmit = this.onSubmit.bind(this);
@@ -25,16 +22,22 @@ class AgencyLogin extends Component {
 
         const { history } = this.props;
 
-        AuthenticationDataService.agencyLogin(this.state.username, this.state.password)
+        let requestBody = {
+            email:this.state.username,
+            password:this.state.password,
+        };
+        
+        AuthenticationDataService.candidateLogin(requestBody)
         .then((response) => { 
-                AuthenticationService.registerSuccessfulAgencyLogin(response.data);  
-                if(response.data.email == null)
+                console.log(` Returned post login ${requestBody} `);
+                AuthenticationService.registerSuccessfulUserLogin(response.data);  
+                if(response.data == null)
                 {
                     this.setState({error:"Invalid credentials"})
                 } 
                 else{  
                     this.setState({error:"Valid credentials"})
-                    history.push('/Agency/Home');
+                    //history.push('/user/home');
                 }
                 console.log(response.data) })
         .catch(  
@@ -44,7 +47,6 @@ class AgencyLogin extends Component {
         } )
     }
 
-
     componentDidMount() {
         console.log("Admin component did mount");
     }
@@ -52,12 +54,13 @@ class AgencyLogin extends Component {
     handleChange(event)//This is a synthetic event
     {
         this.setState({ [event.target.name]: event.target.value });
+        
     }
-
+    
     render() {
         return (
             <div className="container">
-
+                
                 <div className="row">
                     <div className="col-md-6">
 
@@ -67,19 +70,19 @@ class AgencyLogin extends Component {
 
                     </div>
                 </div>
-
+                
                 <div className="row">
-                    <div>
+                <div>
                         <div className="form-group">
                             <label>Email address</label>
                             <input type="email" name="username" className="form-control" onChange={this.handleChange}
                                 placeholder="Enter email" />
-                            <small className="form-text text-muted">Your registered email goes here</small>
+                            <small className="form-text text-muted">Your registered personal email goes here</small>
                         </div>
 
                         <div className="form-group">
                             <label>Password</label>
-                            <input type="password" name="password" className="form-control" onChange={this.handleChange}
+                            <input type="password"  name="password" className="form-control" onChange={this.handleChange}
                                 id="exampleInputPassword1" placeholder="Password" />
                         </div>
 
@@ -94,7 +97,6 @@ class AgencyLogin extends Component {
             </div>
         );
     }
-
 }
 
-export default withRouter(AgencyLogin);
+export default withRouter(CandidateLogin);

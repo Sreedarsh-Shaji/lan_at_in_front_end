@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
 import AuthenticationDataService from "./AuthenticationDataService"
 import AuthenticationService from './AuthenticationService';
+import CompanyHomePage from '../CompanyComponents/CompanyHome'
 import { withRouter } from 'react-router';
 
-class AdminLogin extends Component {
+import Cookies from 'universal-cookie';
 
-    
-
+class CompanyLogin extends Component {
+  
     constructor(props) {
         super(props)
 
         this.state = {
-            username: '',
-            password: '',
-            error: false,
+            email: '',
+            password: ''
         }
 
         this.onSubmit = this.onSubmit.bind(this);
@@ -24,16 +24,27 @@ class AdminLogin extends Component {
 
         const { history } = this.props;
 
-        AuthenticationDataService.adminLogin(this.state.username, this.state.password)
+        
+        let requestBody ={
+            
+           email:this.state.email,
+           password:this.state.password,
+              
+        }
+
+        AuthenticationDataService.companyLogin(requestBody)
         .then((response) => { 
-                AuthenticationService.registerSuccessfulAdminLogin(response.data);  
-                if(response == null)
+                console.log(response.data);
+                AuthenticationService.registerSuccessfulCompanyLogin(response.data);  
+                console.log(new Cookies().get('Company'));
+                if(response.data.email == null)
                 {
                     this.setState({error:"Invalid credentials"})
                 } 
                 else{  
                     this.setState({error:"Valid credentials"})
-                    history.push('/Admin/Home');
+                    alert("valid credentials");
+                    history.push('/Company/Home');
                 }
                 console.log(response.data) })
         .catch(  
@@ -45,7 +56,7 @@ class AdminLogin extends Component {
 
 
     componentDidMount() {
-        console.log("Admin component did mount");
+        console.log("Company login component did mount");
     }
 
     handleChange(event)//This is a synthetic event
@@ -71,9 +82,9 @@ class AdminLogin extends Component {
                     <div>
                         <div className="form-group">
                             <label>Email address</label>
-                            <input type="email" name="username" className="form-control" onChange={this.handleChange}
+                            <input type="email" name="email" className="form-control" onChange={this.handleChange}
                                 placeholder="Enter email" />
-                            <small className="form-text text-muted">Admin email goes here</small>
+                            <small className="form-text text-muted">Your registered company email goes here</small>
                         </div>
 
                         <div className="form-group">
@@ -93,8 +104,7 @@ class AdminLogin extends Component {
             </div>
         );
     }
+
 }
 
-
-
-export default withRouter(AdminLogin);
+export default withRouter(CompanyLogin);

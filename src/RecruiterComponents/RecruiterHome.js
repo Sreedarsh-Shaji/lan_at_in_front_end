@@ -2,16 +2,28 @@ import React, { Component } from 'react';
 import Header from './CommonComponents/Header';
 import Footer from './CommonComponents/Footer';
 
-class HomePage extends Component {
+class RecruiterHome extends Component {
+
+
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            username: '',
+            password: ''
+        }
+
+    }
+
     render() {
         return (
             <div>
                 <Header/>
-                        <div className="container">
+                <div className="container">
                             <div className="row">
                                 <div className="col-md-12">
                                     <br />
-                                    <h1 style={{ textAlign: "center",color: "#003300" }}> ADMIN </h1>
+                                    <h1 style={{ textAlign: "center",color: "#003300" }}> Company </h1>
                                     <br />
                                 </div>
                             </div>
@@ -28,7 +40,7 @@ class HomePage extends Component {
                             <div></div>
                             <div className="row">
                                 <div className="col-md-7">
-                                    <img src="https://i.pinimg.com/originals/94/09/7e/94097e458fbb22184941be57aaab2c8f.png" height="400px" alt="Admin Home image" />
+                                    <img src="https://previews.123rf.com/images/jemastock/jemastock1809/jemastock180908735/109933511-grafikdesign-des-firmengeb%C3%A4udes-isometrische-vektorillustration.jpg" height="400px" alt="Kia car" />
                                 </div>
                                 <div className="col-md-5">
 
@@ -42,8 +54,8 @@ class HomePage extends Component {
                                         </div>
                                     </div>
                                     <div class="section-title">
-                                        <h2 style={{ color: "#0000ff"}}>Admin</h2>
-                                        <p>Admin account details</p>
+                                        <h2 style={{ color: "#0000ff"}}>Recruiter Home Page </h2>
+                                        <p>Company can manage and operate on the resources from here on</p>
                                     </div>
                                     <div className="container">
                                         <div className="row">
@@ -54,12 +66,11 @@ class HomePage extends Component {
                                     </div>                           
                                 </div>
                             </div>
-                        </div>        
-
+                        </div>
                 <Footer/>
             </div>
         );
     }
 }
 
-export default HomePage;
+export default RecruiterHome;

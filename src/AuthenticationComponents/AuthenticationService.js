@@ -1,3 +1,6 @@
+
+import Cookies from 'universal-cookie';
+
 class AuthenticationService{
 
     registerSuccessfulAdminLogin(admin)//Registers admin login
@@ -31,6 +34,10 @@ class AuthenticationService{
     }
     isUserLoggedIn(){
         let user=sessionStorage.getItem('authenticatedUser')
+        return user === null? false :true;
+    }
+    isRecruiterLoggedIn(){
+        let user=sessionStorage.getItem('authenticatedRecruiter')
         return user === null? false :true;
     }
 
@@ -70,6 +77,43 @@ class AuthenticationService{
      {
         return sessionStorage.getItem('authenticatedUser');
      } 
+
+
+// Registers all successful login - Job seeker
+
+registerSuccessfulJobSeekerLogin(jobSeeker)//Registers Company login
+{
+    console.log("Register successful jobSeeker login");
+    new Cookies().set('JobSeeker', jobSeeker, { path: '/' });
+    sessionStorage.setItem('authenticatedjobSeeker',jobSeeker);
+}
+
+registerSuccessfulCompanyLogin(company)//Registers Company login
+{
+   sessionStorage.setItem('authenticatedCompany',company);
+}
+
+
+
+isCompanyLoggedIn()//Return true if Company is logged in
+{ 
+    return sessionStorage.getItem('authenticatedCompany') === null ? false : true ;
+} 
+
+isJobSeekerLoggedIn()//Return true if Company is logged in
+{ 
+    return sessionStorage.getItem('authenticatedJobseeker') === null ? false : true ;
+}
+
+    companyLogout()
+    {
+        sessionStorage.removeItem('authenticatedCompany');
+    }
+
+    getPresentCompany()
+    {
+       return sessionStorage.getItem('authenticatedCompany');
+    }
 
 }
 

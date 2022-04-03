@@ -3,23 +3,36 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 
 import HomePage from '../AdminAccount/HomePage';
 import LoginComponent from './LoginComponent';
-import AllUsers from '../AdminAccount/AllUsers';
-import AllAgencies from '../AdminAccount/AllAgencies';
-import AllTrips from '../AdminAccount/AllTrips';
-import AllOfficers from '../AdminAccount/AllOfficers';
-import AllVehicle from '../AdminAccount/AllVehicle';
-
-import AgencyHomePage from '../AgencyAccount/AgencyHomePage.js'
-import AgencyOfficesPage from '../AgencyAccount/AgencyOfficesPage.js'
 import Mainpage from '../LandingPage/Mainpage';
 import AboutComponent from './AboutComponent';
 import SignUpComponent from './SignUpComponent';
 import UserHome from '../UserAccount/UserHome';
-import ViewTrips from '../AgencyAccount/ViewTrips';
-import ViewVehicle from '../AgencyAccount/ViewVehicle';
 import ViewOffice from '../UserAccount/ViewOffice';
 import ViewUserTrips from '../UserAccount/ViewUserTrips';
 
+import CompanyHomePage from '../CompanyComponents/CompanyHome';
+import Vacancies from '../CompanyComponents/Vacancies';
+
+import CandidateVacancies from '../CandidateComponents/CandidateVacancies';
+import CandidateVacancyDetails from '../CandidateComponents/CandidateVacancyDetails';
+import CandidateAppliedPositions from '../CandidateComponents/CandidateAppliedPositions';
+import CandidateViewInterviewInvites from '../CandidateComponents/CandidateViewInterviewInvites';
+import CandidateProfile from '../CandidateComponents/CandidateProfile';
+
+import RecruiterHome from '../RecruiterComponents/RecruiterHome';
+
+import GetApplicantList from '../CompanyComponents/GetApplicantList';
+import ApplicantProfile from '../CompanyComponents/ApplicateProfile';
+import InviteForInterview from '../CompanyComponents/InviteForInterview';
+import GetInterviewList from '../CompanyComponents/GetInterviewList';
+import Recruiters from '../CompanyComponents/Recruiters';
+
+import RecruiterVacancies from '../RecruiterComponents/RecruiterVacancies';
+import RecruiterGetApplicantList from '../RecruiterComponents/RecruiterGetApplicantList';
+
+import AdminViewRecruiters from '../AdminAccount/AdminViewRecruiters';
+import AdminViewVacancies from '../AdminAccount/AdminViewVacancies';
+import AdminViewAllJobSeekers from '../AdminAccount/AdminViewAllJobSeekers';
 
 class MainRoutes extends Component {
     render() {
@@ -29,24 +42,43 @@ class MainRoutes extends Component {
                 <Router>
                     <Switch>
                         
-                        <Route path="/Login" exact component={LoginComponent}/>
-                        <Route path="/home" exact component={Mainpage}/>
+                        <Route path="/login" exact component={LoginComponent}/>
+                        <Route path="/" exact component={Mainpage}/>
                         <Route path="/about" exact component={AboutComponent}/>
                         <Route path="/sign" exact component={SignUpComponent}/>
 
+
+                        { /* Company Components */ }
+                        <Route path="/Company/Home" component={CompanyHomePage}/>
+                        <Route path="/Company/Vacancies" component={Vacancies}/>
+                        <Route path="/Company/ApplicantList" component={GetApplicantList}/>
+                        <Route path="/Company/ApplicantDetail/:mail" component={ApplicantProfile}/>
+                        <Route path="/Company/Applciation/invite-for-intervire:data" component={InviteForInterview}/>
+                        <Route path="/Company/Applciation/get-interview-list" component={GetInterviewList}/>
+                        <Route path="/Company/Recruiters" component={Recruiters}/>
+
+                        {/* Candidate Component */}
+                        <Route path="/Candidate/Vacancies" component={CandidateVacancies}/>
+                        <Route path="/Candidate/VacancyDetails" component={CandidateVacancies}/>
+                        <Route path="/Candidate/see-a-vacancy/:id" component={CandidateVacancyDetails}/>
+                        <Route path="/Candidate/see-applied-positions" component={CandidateAppliedPositions}/>
+                        <Route path="/Candidate/see-interview-invites" component={CandidateViewInterviewInvites}/>
+                        <Route path="/Candidate/see-profile" component={CandidateProfile}/>
+                        
+                        
+                        {/* Recruiter Component */}
+                        <Route path="/Recruiter/Home" component={RecruiterHome}/>
+                        <Route path="/Recruiter/vacancies" component={RecruiterVacancies}/>
+                        <Route path="/Recruiter/applicant-list" component={RecruiterGetApplicantList}/>
+
+
                         { /* Admin components */ }
                         <Route path="/Admin/Home" component={HomePage}/>
-                        <Route path="/Admin/All-users" component={AllUsers}/>
-                        <Route path="/Admin/All-agencies" component={AllAgencies}/>
-                        <Route path="/Admin/All-trips" component={AllTrips}/>
-                        <Route path="/Admin/All-officers" component={AllOfficers}/>
-                        <Route path="/Admin/All-Vehicles" component={AllVehicle}/>
+                        <Route path="/Admin/View-all-recruiters" component={AdminViewRecruiters}/>
+                        <Route path="/Admin/View-all-vacancies" component={AdminViewVacancies}/>
+                        <Route path="/Admin/View-all-job-seekers" component={AdminViewAllJobSeekers}/>
 
-                        { /* Agency components */ }
-                        <Route path="/Agency/Home" component={AgencyHomePage}/>
-                        <Route path="/Agency/Offices" component={AgencyOfficesPage}/>
-                        <Route path="/Agency/trips" component={ViewTrips}/>
-                        <Route path="/Agency/vehicles" component={ViewVehicle}/>
+                        
 
 
                         {/* User componets*/}

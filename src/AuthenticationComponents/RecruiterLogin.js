@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
 import AuthenticationDataService from "./AuthenticationDataService"
 import AuthenticationService from './AuthenticationService';
+import CompanyHomePage from '../CompanyComponents/CompanyHome'
 import { withRouter } from 'react-router';
 
+import Cookies from 'universal-cookie';
 
-
-class UserLogin extends Component {
+class RecruiterLogin extends Component {
+  
     constructor(props) {
         super(props)
 
         this.state = {
             username: '',
-            password: '',
-            error: false,
+            password: ''
         }
 
         this.onSubmit = this.onSubmit.bind(this);
@@ -22,17 +23,28 @@ class UserLogin extends Component {
     onSubmit(values) {
 
         const { history } = this.props;
+
         
-        AuthenticationDataService.userLogin(this.state.username, this.state.password)
+        let requestBody ={
+            
+        username:this.state.username,
+        password:this.state.password,
+              
+        }
+
+        AuthenticationDataService.recruiterLogin(requestBody)
         .then((response) => { 
-                AuthenticationService.registerSuccessfulUserLogin(response.data);  
-                if(response.data.email == null)
+                AuthenticationService.registerSuccessfulCompanyLogin(response.data);  
+                console.log(new Cookies().get('Recruiter'));
+                if(response.data == null)
                 {
                     this.setState({error:"Invalid credentials"})
                 } 
                 else{  
-                    this.setState({error:"Valid credentials"})
-                    history.push('/user/home');
+                    this.setState({error:"Valid credentials"});
+                    console.log( response.data );
+                    alert("valid credentials");
+                    //history.push('/Company/Home');
                 }
                 console.log(response.data) })
         .catch(  
@@ -42,20 +54,20 @@ class UserLogin extends Component {
         } )
     }
 
+
     componentDidMount() {
-        console.log("Admin component did mount");
+        console.log("Company login component did mount");
     }
 
     handleChange(event)//This is a synthetic event
     {
         this.setState({ [event.target.name]: event.target.value });
-        
     }
-    
+
     render() {
         return (
             <div className="container">
-                
+
                 <div className="row">
                     <div className="col-md-6">
 
@@ -65,19 +77,19 @@ class UserLogin extends Component {
 
                     </div>
                 </div>
-                
+
                 <div className="row">
-                <div>
+                    <div>
                         <div className="form-group">
                             <label>Email address</label>
                             <input type="email" name="username" className="form-control" onChange={this.handleChange}
                                 placeholder="Enter email" />
-                            <small className="form-text text-muted">Your registered email goes here</small>
+                            <small className="form-text text-muted">Your registered official email goes here</small>
                         </div>
 
                         <div className="form-group">
                             <label>Password</label>
-                            <input type="password"  name="password" className="form-control" onChange={this.handleChange}
+                            <input type="password" name="password" className="form-control" onChange={this.handleChange}
                                 id="exampleInputPassword1" placeholder="Password" />
                         </div>
 
@@ -92,6 +104,7 @@ class UserLogin extends Component {
             </div>
         );
     }
+
 }
 
-export default withRouter(UserLogin);
+export default withRouter(RecruiterLogin);

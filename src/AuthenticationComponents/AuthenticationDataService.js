@@ -1,10 +1,15 @@
 import axios from "axios";
+import AuthenticationService from "./AuthenticationService";
+import Cookies from 'universal-cookie';
 
 class AuthenticationDataService{
+
+    companyURL = "http://localhost:8012/";
+    userURL =    "http://localhost:8012";
+    recruiterURL =    "http://localhost:8012";
    
     adminLogin(username,password){
-        let ret = axios.get(`http://localhost:8085/api/v1/admin/adminLogin/${username}/${password}`);
-        return ret;
+        return axios.get(`${this.companyURL}Admin/login/${username}/${password}`);
     } 
 
     addOffice(data){
@@ -39,7 +44,6 @@ class AuthenticationDataService{
     }
 
     agencySignup(data){
-        
         let ret = axios.post(`http://localhost:8085/api/v1/agency/agencySignup/`,data);
         return ret;
     }
@@ -124,6 +128,121 @@ class AuthenticationDataService{
         let v = axios.get(`http://localhost:8085/api/v1/user/user_see_vehicle_by_location/1`)
         return v
     }
+
+
+//Job Seeker app
+
+
+//All signup server comm
+companySignup(data){
+    let ret = axios.post(`${this.companyURL}company/signup`,data);
+    return ret;
+}
+
+candidateSignup(data){
+    let ret = axios.post(`${this.userURL}/api/v1/userAuth/signup-user`,data);
+    return ret;
+}
+
+// All login server comm
+companyLogin(data)
+{
+    console.log(data);
+    let ret = axios.post(this.companyURL+'company/login',data);
+    AuthenticationService.registerSuccessfulCompanyLogin(ret);
+    return ret;
+}
+
+recruiterLogin(data)
+{
+    console.log(data);
+    let ret = axios.post(this.companyURL+'company/login',data);
+    sessionStorage.setItem('authenticatedRecruiter',ret);
+    console.log("Register successful recruiter login");
+    new Cookies().set('Recruiter', data, { path: '/' });
+    return ret;
+}
+
+candidateLogin(data)
+{
+    console.log(" in candidate login : "+data);
+    let ret = axios.post(`${this.userURL}/api/v1/userAuth/login-user`,data);
+    sessionStorage.setItem('authenticatedJobseeker',ret);
+    console.log("Register successful candidate login");
+    new Cookies().set('Jobseeker', data, { path: '/' });
+    return ret;
+}
+
+candidateApplyForVacancy(data)
+{
+    console.log(" in candidateApplyForVacancy() : "+data);
+    let ret = axios.post(`${this.userURL}/api/v1/userApply/apply`,data);
+    return ret;
+}
+
+getAppliedPositions(mail)
+{
+    console.log(" in getAppliedPositions() : "+mail);
+    return axios.get( this.userURL+'/api/v1/userApply/get-bt-mail/'+mail) ;
+}
+
+
+//All company comms
+companyRegisterVacancy(data)
+{
+    console.log(" in company register vacancy : "+data);
+    let ret = axios.post(`${this.companyURL}hiring/save-vacancy`,data);
+    return ret;
+}
+
+getCompanyVacancies()
+{
+    return axios.get(`${this.companyURL}hiring/get-all-vacancies`) ;
+}
+
+getAllStudents()
+{
+    return axios.get(`${this.companyURL}api/v1/userAuth/pass/all`) ;
+}
+
+getRecruitersByCompany()
+{
+    return axios.get(`${this.companyURL}recruiter/get-all`) ;
+}
+
+saveRecruitersByCompany(data)
+{
+    return axios.post(`${this.companyURL}recruiter/save-a-recruiter`,data) ;
+}
+
+
+getVacancyDetailsById(uuid)
+{
+    console.log(uuid);
+    return axios.get( this.companyURL+'hiring/get-vacancy/'+uuid) ;
+}
+
+getAllApplicants()
+{
+    return axios.get(`${this.companyURL}Company/applications/get-all`) ;
+}
+
+getInvitedApplicants()
+{
+    return axios.get(`${this.companyURL}Company/invites/get-all-invited`) ;
+}
+
+getApplicantByMailId(mail)
+{
+    return axios.get(`${this.companyURL}Company/applications/get-by-id/${mail}`);
+}
+
+saveInterviewInvite(data)
+{
+    return axios.post(`${this.companyURL}Company/invites/save`,data);
+}
+
+
 }
 
 export default new AuthenticationDataService();

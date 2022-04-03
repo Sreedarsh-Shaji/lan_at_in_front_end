@@ -3,7 +3,7 @@ import AuthenticationDataService from "./AuthenticationDataService"
 import AuthenticationService from './AuthenticationService';
 import { withRouter } from 'react-router';
 
-class AgencySignup extends Component {
+class CandidateSignup extends Component {
 
     
 
@@ -12,47 +12,49 @@ class AgencySignup extends Component {
 
         this.state = {
             
-                agencyId:'',
-                approved: true,
-                creationDateTime : '2021-07-12T16:04:37.500Z',
-                email :'',
-                lastLogin : '2021-07-12T16:04:37.500Z',
-                name:'',
-                password :'',
-                phone:''
+            uid: '',
+            name: '',
+            password: '',
+            email: '',
+            phone: '',
+            role: "JOBSEEKER"
               
         }
-        
+
         this.onSubmit = this.onSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
 
-    onSubmit(values) {
+   
+
+    onSubmit() {
 
         const { history } = this.props;
+        
 
         let requestBody ={
-                agencyId: null,
-                approved: true,
-                creationDateTime : '2021-07-12T16:04:37.500Z',
-                email : this.state.email,
-                lastLogin : '2021-07-12T16:04:37.500Z',
-                name: this.state.name,
-                password : this.state.password,
-                phone:this.state.phone
+            
+            uid: this.state.uid,
+            name: this.state.name,
+            password: this.state.password,
+            email: this.state.email,
+            phone: this.state.phone,
+            role: this.state.role
+              
         }
 
-        AuthenticationDataService.agencySignup(requestBody)
+        AuthenticationDataService.candidateSignup(requestBody)
             .then((response) => { 
+                console.log(response);
                 if(response.data == null)
                 {
                     alert("Invalid credentials");
-                    this.setState({message:"Invalid credentials"})
+                    this.setState({message:"Access not available"})
                 } 
                 else{  
-                    alert("Added data successfully");
+                    alert("Signup successful");
                     this.setState({message:"Valid credentials"})
-                    //history.push('/Agency/Home');
+                    // history.push('/login');
                 }
                 console.log(response.data) })
         .catch(  
@@ -64,12 +66,13 @@ class AgencySignup extends Component {
 
 
     componentDidMount() {
-        console.log("Admin component did mount");
+        console.log("User component did mount");
     }
 
     handleChange(event)//This is a synthetic event
     {
         this.setState({ [event.target.name]: event.target.value });
+        
     }
 
     render() {
@@ -87,33 +90,30 @@ class AgencySignup extends Component {
                 </div>
 
                 <div className="row">
-                    <div>
+                <div>
                         <div className="form-group">
-                            <label>Email address</label>
-                            <input type="email" name="email" className="form-control" onChange={this.handleChange}
-                                placeholder="Enter email" />
-                            <small className="form-text text-muted">Your registered email goes here</small>
-                        </div>
-
-                        <div className="form-group">
-                            <label>Name</label>
-                            <input type="text" name="name" className="form-control" onChange={this.handleChange}
-                                placeholder="Enter Name" />
+                            <label>Company name</label>
+                            <input type="email" name="name" className="form-control" onChange={this.handleChange}
+                                placeholder="Enter User Name" />
                         </div>
 
                         <div className="form-group">
                             <label>Password</label>
                             <input type="password" name="password" className="form-control" onChange={this.handleChange}
-                                id="exampleInputPassword1" placeholder="Password" />
+                                placeholder="Enter Password" />
                         </div>
+
 
                         <div className="form-group">
+                            <label>Email</label>
+                            <input type="email" name="email" className="form-control" onChange={this.handleChange}
+                                placeholder="Enter Email" />
+                        </div>
+                        <div className="form-group">
                             <label>Phone</label>
-                            <input type="text" name="phone" className="form-control" onChange={this.handleChange}
+                            <input type="number" name="phone" className="form-control" onChange={this.handleChange}
                                 placeholder="Enter Phone" />
                         </div>
-
-
                         <button type="submit" className="btn btn-success" style={{ width: "100%" }}
                             onClick={this.onSubmit}
                         >Submit</button>
@@ -127,4 +127,4 @@ class AgencySignup extends Component {
 
 
 
-export default AgencySignup;
+export default CandidateSignup;

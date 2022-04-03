@@ -1,10 +1,10 @@
 import { Component } from "react";
 import Header from "../LandingPage/Header";
 import FooterComponent from "./FooterComponent";
-import AgencySignup from "./AgencySignup";
-import UserSignup from "./UserSignup";
+import CompanySignup from "./CompanySignup";
+import CandidateSignup from "./CandidateSignup";
 
-class SignUpComponent extends Component{
+class SignUpComponent extends Component {
 
 
     constructor() {
@@ -14,60 +14,60 @@ class SignUpComponent extends Component{
         }
         this.userSelect = this.userSelect.bind(this);
     }
-    
-    render(){
-        return(
-            <>
-                <Header/>
-                    <div className="container">
-                            <div className="row">
-                                <div className="col-md-12">
-                                    <br/>
-                                    <h1 style={{ textAlign: "center" ,color: "#003300"}}> Sign Up {this.state.usertype} </h1>
-                                    <br/>
-                                </div>
-                            </div>
-                        </div>
 
-                        
-                        <div className="container">
+    render() {
+        return (
+            <>
+                <Header />
+                <div className="container">
+                    <div className="row">
+                        <div className="col-md-12">
+                            <br />
+                            <h1 style={{ textAlign: "center", color: "#003300" }}> Sign Up {this.state.usertype} </h1>
+                            <br />
+                        </div>
+                    </div>
+                </div>
+
+
+                <div className="container">
                     <div></div>
                     <div className="row">
                         <div className="col-md-7">
-                            <img src="https://3p6y693soagg24ij033i3rcg-wpengine.netdna-ssl.com/wp-content/uploads/2020/04/541072.jpg" alt="Kia car" />
+                            <img src="https://media.istockphoto.com/vectors/man-working-on-the-internet-on-a-light-background-vector-id1025033348?k=20&m=1025033348&s=612x612&w=0&h=noBXUFqaUhWOCeKg1ekFZ9qHhKvwmFSt0ctITPNNy1w=" height="500px" alt="Kia car" />
                         </div>
                         <div className="col-md-5">
 
-                            <div className="btn-group btn-group-toggle" data-toggle="buttons"> 
-                                <label className="btn btn-primary" style={{ width:"110px" }}>
+                            <div className="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label className="btn btn-primary" style={{ width: "110px" }}>
                                     <input type="radio" name="options" id="option2"
-                                    onClick={() => this.userSelect("Agency")}/> 
-                                    Agency
+                                        onClick={() => this.userSelect("Company")} />
+                                    Company
                                 </label>
-                                <label className="btn btn-primary" style={{ width:"100px" }}>
-                                    <input type="radio" name="options" id="option3" style={{ width:"100%" }} 
-                                    onClick={() => this.userSelect("User")}/> 
+                                <label className="btn btn-primary" style={{ width: "100px" }}>
+                                    <input type="radio" name="options" id="option3" style={{ width: "100%" }}
+                                        onClick={() => this.userSelect("User")} />
                                     User
                                 </label>
                             </div>
 
-                            {this.state.usertype === "Agency" && <AgencySignup/>}
-                            {this.state.usertype === "User" && <UserSignup/>}
+                            {this.state.usertype === "Company" && <CompanySignup />}
+                            {this.state.usertype === "User" && <CandidateSignup />}
 
                         </div>
                     </div>
-                </div>        
+                </div>
 
-                
+
+
             </>
         );
     }
-    
-    userSelect(user)
-    {
+
+    userSelect(user) {
         this.setState(prevState => ({
             usertype: user
-          }));
+        }));
     }
 }
 

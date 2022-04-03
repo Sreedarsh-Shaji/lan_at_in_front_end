@@ -14,7 +14,7 @@ class Mainpage extends Component {
                     <div className="row">
                         <div className="col-md-12">
                             <br />
-                            <h1 style={{ textAlign: "center",color: "#003300" }}> Car Rental System Software </h1>
+                            <h1 style={{ textAlign: "center",color: "#003300" }}> Lan@In - JOB SEEKER PORTAL </h1>
                             <br />
                         </div>
                     </div>
@@ -31,7 +31,7 @@ class Mainpage extends Component {
                     <div></div>
                     <div className="row">
                         <div className="col-md-7">
-                            <img src="https://3p6y693soagg24ij033i3rcg-wpengine.netdna-ssl.com/wp-content/uploads/2020/04/541072.jpg" alt="Kia car" />
+                            <img src="https://teresas.ac.in/wp-content/uploads/2018/04/placement-services.png" height={400} alt="Kia car" />
                         </div>
                         <div className="col-md-5">
 
@@ -45,8 +45,10 @@ class Mainpage extends Component {
                                 </div>
                             </div>
                             <div class="section-title">
-                                <h2 style={{ color: "#0000ff"}}>What We Do</h2>
-                                <p>Small businesses are always strapped for cash, this is the reason we are asking you to Understand Real Reason to Invest in Technology for your business. Take start and make an investment to Progress–anytime, anywhere, with a sense of security & the need for speed.</p>
+                                <h2 style={{ color: "#0000ff"}}>Lan@in Job Seeker Portal</h2>
+                                <p>Shaping a happy career is a priority for all budding professionals. However, the stakes to get there never seemed to be this high.
+<br/>
+It's though undeniable that countless job portals claim to be the best when it comes to providing the right careers, however, we provide the best website for job search.</p>
                             </div>
                             <div className="container">
                                 <div className="row">
