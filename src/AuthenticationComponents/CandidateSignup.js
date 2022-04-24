@@ -92,7 +92,7 @@ class CandidateSignup extends Component {
                 <div className="row">
                 <div>
                         <div className="form-group">
-                            <label>Company name</label>
+                            <label>User name</label>
                             <input type="email" name="name" className="form-control" onChange={this.handleChange}
                                 placeholder="Enter User Name" />
                         </div>
