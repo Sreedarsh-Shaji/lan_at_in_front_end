@@ -3,7 +3,7 @@ import AuthenticationDataService from "./AuthenticationDataService"
 import AuthenticationService from './AuthenticationService';
 import { withRouter } from 'react-router';
 
-class CompanySignup extends Component {
+class StudenySignup extends Component {
 
     constructor(props) {
         super(props)
@@ -70,7 +70,7 @@ class CompanySignup extends Component {
         return (
             <div className="container">
 
-                <div className="row">
+<div className="row">
                     <div className="col-md-6">
 
                         {this.state.error && <div className="alert alert-danger" role="alert">
@@ -81,9 +81,19 @@ class CompanySignup extends Component {
                 </div>
 
                 <div className="row">
+                    <div className="col-md-8">
+                        <hr/>
+                        <div className="alert alert-info" role="alert">
+                            This is a Limited account, Please use Jobseeker profile for full functionality.
+                        </div>
+
+                    </div>
+                </div>
+
+                <div className="row">
                     <div>
                         <div className="form-group">
-                            <label>Company name</label>
+                            <label>User name</label>
                             <input type="email" name="name" className="form-control" onChange={this.handleChange}
                                 placeholder="Enter Company Name" />
                         </div>
@@ -96,7 +106,7 @@ class CompanySignup extends Component {
 
 
                         <div className="form-group">
-                            <label>Official Email</label>
+                            <label>Email</label>
                             <input type="email" name="email" className="form-control" onChange={this.handleChange}
                                 placeholder="Enter Email" />
                         </div>
@@ -118,4 +128,4 @@ class CompanySignup extends Component {
 
 
 
-export default CompanySignup;
+export default StudenySignup;

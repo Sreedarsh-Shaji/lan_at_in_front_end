@@ -2,6 +2,7 @@ import { Component } from "react";
 import Header from "../LandingPage/Header";
 import FooterComponent from "./FooterComponent";
 import CompanySignup from "./CompanySignup";
+import StudenySignup from "./StudenySignup";
 import CandidateSignup from "./CandidateSignup";
 
 class SignUpComponent extends Component {
@@ -47,12 +48,18 @@ class SignUpComponent extends Component {
                                 <label className="btn btn-primary" style={{ width: "100px" }}>
                                     <input type="radio" name="options" id="option3" style={{ width: "100%" }}
                                         onClick={() => this.userSelect("User")} />
-                                    User
+                                    Job Seeker
+                                </label>
+                                <label className="btn btn-primary" style={{ width: "100px" }}>
+                                    <input type="radio" name="options" id="option3" style={{ width: "100%" }}
+                                        onClick={() => this.userSelect("Student")} />
+                                    Student
                                 </label>
                             </div>
 
                             {this.state.usertype === "Company" && <CompanySignup />}
                             {this.state.usertype === "User" && <CandidateSignup />}
+                            {this.state.usertype === "Student" && <StudenySignup />}
 
                         </div>
                     </div>
