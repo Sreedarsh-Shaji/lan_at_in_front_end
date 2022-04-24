@@ -33,6 +33,8 @@ import RecruiterGetApplicantList from '../RecruiterComponents/RecruiterGetApplic
 import AdminViewRecruiters from '../AdminAccount/AdminViewRecruiters';
 import AdminViewVacancies from '../AdminAccount/AdminViewVacancies';
 import AdminViewAllJobSeekers from '../AdminAccount/AdminViewAllJobSeekers';
+import AdminViewCompanies from '../AdminAccount/AdminViewCompanies';
+import AdminAddCareerPath from '../AdminAccount/AdminAddCareerPath';
 
 class MainRoutes extends Component {
     render() {
@@ -77,6 +79,8 @@ class MainRoutes extends Component {
                         <Route path="/Admin/View-all-recruiters" component={AdminViewRecruiters}/>
                         <Route path="/Admin/View-all-vacancies" component={AdminViewVacancies}/>
                         <Route path="/Admin/View-all-job-seekers" component={AdminViewAllJobSeekers}/>
+                        <Route path="/Admin/View-all-companies" component={AdminViewCompanies}/>
+                        <Route path="/Admin/add-career-path" component={AdminAddCareerPath}/>
 
                         
 
