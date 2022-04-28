@@ -4,9 +4,9 @@ import Cookies from 'universal-cookie';
 
 class AuthenticationDataService{
 
-    companyURL = "http://54.234.117.216:8080/";
-    userURL =    "http://54.234.117.216:8080";
-    recruiterURL =    "http://54.234.117.216:8080";
+    companyURL = "http://localhost:8080/";
+    userURL =    "http://localhost:8080";
+    recruiterURL =    "http://localhost:8080";
    
     adminLogin(username,password){
         return axios.get(`${this.companyURL}Admin/login/${username}/${password}`);
@@ -183,11 +183,19 @@ candidateApplyForVacancy(data)
 getAppliedPositions(mail)
 {
     console.log(" in getAppliedPositions() : "+mail);
-    return axios.get( this.userURL+'/api/v1/userApply/get-bt-mail/'+mail) ;
+    return axios.get( this.userURL+'/api/v1/userApply/get-by-mail/'+mail) ;
 }
 
 
 //All company comms
+getAllCompanies()
+{
+    console.log(" Fetching company vacancies ");
+    let ret = axios.get(`${this.companyURL}Admin/view-all-companies`);
+    console.log(" Fetch completed ");
+    return ret;
+}
+
 companyRegisterVacancy(data)
 {
     console.log(" in company register vacancy : "+data);
@@ -242,6 +250,16 @@ saveInterviewInvite(data)
     return axios.post(`${this.companyURL}Company/invites/save`,data);
 }
 
+
+getCareerPath()
+{
+    return axios.get(`${this.companyURL}career/get-all`);
+}
+
+saveCareerPath(data)
+{
+    return axios.post(`${this.companyURL}career/save`,data);
+}
 
 }
 

@@ -26,14 +26,15 @@ class AdminLogin extends Component {
 
         AuthenticationDataService.adminLogin(this.state.username, this.state.password)
         .then((response) => { 
-                AuthenticationService.registerSuccessfulAdminLogin(response.data);  
-                if(response == null)
+                AuthenticationService.registerSuccessfulAdminLogin(response.data); 
+                alert(response.data); 
+                if(response.data == "Valid credentials")
                 {
-                    this.setState({error:"Invalid credentials"})
-                } 
-                else{  
                     this.setState({error:"Valid credentials"})
                     history.push('/Admin/Home');
+                } 
+                else{  
+                    this.setState({error:"Invalid credentials"})
                 }
                 console.log(response.data) })
         .catch(  
@@ -73,7 +74,7 @@ class AdminLogin extends Component {
                             <label>Email address</label>
                             <input type="email" name="username" className="form-control" onChange={this.handleChange}
                                 placeholder="Enter email" />
-                            <small className="form-text text-muted">Admin email goes here</small>
+                            <small className="form-text text-muted">Admin username goes here</small>
                         </div>
 
                         <div className="form-group">

@@ -183,7 +183,7 @@ class AdminViewVacancies extends Component {
                                         this.state.vacancies.map(
                                             vacancy =>                               
                                                 <tr key={vacancy.uuid}>
-                                                    <td>{this.state.rowCount}</td>
+                                                    <td>{this.state.rowCount++}</td>
                                                     <td>{vacancy.role}</td>
                                                     <td>{vacancy.description}</td>
                                                     <td>{vacancy.locationOfEmployment}</td>

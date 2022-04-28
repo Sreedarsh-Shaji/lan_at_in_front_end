@@ -25,13 +25,9 @@ class Header extends Component {
                <nav className="navbar navbar-expand-md navbar-dark bg-dark">
                    <div><a href="#" className="navbar-brand">Dashboard</a></div>
                    <ul className="navbar-nav">
-                       {isCompanyLoggedIn && <li><Link to="/Company/Home"  className="nav-link">Home</Link></li>}
-                       {isCompanyLoggedIn && <li><Link to="/Company/"  className="nav-link">Recruiter</Link></li>}
-                       {isCompanyLoggedIn && <li><Link to="/Company/Vacancies"  className="nav-link">Vacencies</Link></li>}
-                       {isCompanyLoggedIn && <li><Link to="/Agency/trips"  className="nav-link">Applicants</Link></li>}
-                       {isCompanyLoggedIn && <li><Link to="/Agency/trips"  className="nav-link">Interviews</Link></li>}
-                       {isCompanyLoggedIn && <li><Link to="/Agency/trips"  className="nav-link">Selected</Link></li>}
-                       {isCompanyLoggedIn && <li><Link to="/Agency/trips"  className="nav-link">Feedback</Link></li>}
+                       {isCompanyLoggedIn && <li><Link to="/Recruiter/Home" className="nav-link">Home</Link></li>}
+                       {isCompanyLoggedIn && <li><Link to="/Recruiter/vacancies" className="nav-link">Vacancies</Link></li>}
+                       {isCompanyLoggedIn && <li><Link to="/Recruiter/applicant-list" className="nav-link">Applicants</Link></li>}
                    </ul>
                    <ul  className="navbar-nav navbar-collapse justify-content-end">
                         {!isCompanyLoggedIn && <li><Link to="/login" className="nav-link">Login</Link></li>}

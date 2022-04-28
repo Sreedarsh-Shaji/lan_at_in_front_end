@@ -67,7 +67,8 @@ class CandidateAppliedPositions extends Component {
     loadData() {
 
         console.log("Company home component did mount");
-        AuthenticationDataService.getAppliedPositions(new Cookies().get('Jobseeker').email).
+        console.log(new Cookies().get('Jobseeker').username);
+        AuthenticationDataService.getAppliedPositions(new Cookies().get('Jobseeker').username).
             then(response => {
                 this.setState({ users: response.data })
                 console.log(response.data)

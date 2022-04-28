@@ -7,9 +7,9 @@ import AuthenticationDataService from '../AuthenticationComponents/Authenticatio
 import AuthenticationService from '../AuthenticationComponents/AuthenticationService';
 
 import Cookies from 'universal-cookie';
-import { Link } from 'react-router-dom';
 
-class CandidateProfile extends Component {
+
+class AdminViewCompanies extends Component {
 
     constructor(props) {
         super(props)
@@ -17,7 +17,7 @@ class CandidateProfile extends Component {
         this.state = {
 
             modelAction: 'Add',
-            users: [],
+            vacancies: [],
 
             role: '',
             description: '',
@@ -45,15 +45,14 @@ class CandidateProfile extends Component {
             willingToRelocate: '',
             linkedInProfile: '',
 
-            rowCount: 1,
-
-
+            rowCount:1,
+            presentCompay: new Cookies().get('Company'),
         };
 
         this.onSubmit = this.onSubmit.bind(this);
         this.openModal = this.openModal.bind(this);
         this.handleChange = this.handleChange.bind(this);
-        this.loadData = this.loadData.bind(this);
+        this.loadData =  this.loadData.bind(this);
 
     }
 
@@ -67,9 +66,9 @@ class CandidateProfile extends Component {
     loadData() {
 
         console.log("Company home component did mount");
-        AuthenticationDataService.getCompanyVacancies().
+        AuthenticationDataService.getAllCompanies().
             then(response => {
-                this.setState({ users: response.data })
+                this.setState({ vacancies: response.data })
                 console.log(response.data)
             })
         // fetch("http://localhost:8012/hiring/get-all-vacancies")
@@ -128,7 +127,7 @@ class CandidateProfile extends Component {
                 else {
                     alert("Added vacancy successfully successfully");
                     this.setState({ message: "Valid credentials" })
-                    history.push('/Agency/vehicles');
+                    history.push('/Company/Vacancies');
                 }
                 console.log(response.data)
             })
@@ -151,64 +150,53 @@ class CandidateProfile extends Component {
                     <div className="row">
                         <div className="col">
                             <br />
-                            <h3 style={{ textAlign: "center" }}>Profile Details</h3>
-                            <hr />
+                            <h3 style={{ textAlign: "center" }}>All Companies</h3>
                         </div>
                     </div>
                     <div className="row">
-                        <div class=" col-md-12 form-group">
-                            <label for="exampleInputEmail1">Education</label>
-                            <small className="form-text text-muted">Accepts 3 qualifications</small>
-                            <table>
-                                <tr>
-                                    <td><input type="text" name="course1" placeholder='Course' class="form-control" id="location" onChange={this.handleChange} /></td>
-                                    <td><input type="number" name="startingYear1" placeholder='Start Year' class="form-control" id="location" onChange={this.handleChange} /></td>
-                                    <td><input type="number" name="endingYear1" placeholder='End Year' class="form-control" id="location" onChange={this.handleChange} /></td>
-                                </tr>
-                                <tr>
-                                    <td><input type="text" name="course2" placeholder='Course' class="form-control" id="location" onChange={this.handleChange} /></td>
-                                    <td><input type="number" name="startingYear2" placeholder='Start Year' class="form-control" id="location" onChange={this.handleChange} /></td>
-                                    <td><input type="number" name="endingYear2" placeholder='End Year' class="form-control" id="location" onChange={this.handleChange} /></td>
-                                </tr>
-                                <tr>
-                                    <td><input type="text" name="course3" placeholder='Course' class="form-control" id="location" onChange={this.handleChange} /></td>
-                                    <td><input type="number" name="startingYear3" placeholder='Start Year' class="form-control" id="location" onChange={this.handleChange} /></td>
-                                    <td><input type="number" name="endingYear3" placeholder='End Year' class="form-control" id="location" onChange={this.handleChange} /></td>
-                                </tr>
-                            </table>
+                        <div className="col-1"></div>
+                        <div className="col-2">
                         </div>
-                    </div>
-                    <div className="row">
-                        <div class="col-md-12 form-group">
-                            <label for="exampleInputEmail1">Skill set</label>
-                            <small className="form-text text-muted">Accepts 3 Skills</small>
-                            <table>
-                                <tr>
-                                    <td><input type="text" name="skill1" placeholder='Name' class="form-control" id="location" onChange={this.handleChange} /></td>
-                                    <td><input type="text" name="type1" placeholder='Type' class="form-control" id="location" onChange={this.handleChange} /></td>
-                                    <td><input type="number" name="experience1" placeholder='Experience' class="form-control" id="location" onChange={this.handleChange} /></td>
-                                </tr>
-                                <tr>
-                                    <td><input type="text" name="skill2" placeholder='Name' class="form-control" id="location" onChange={this.handleChange} /></td>
-                                    <td><input type="text" name="type2" placeholder='Type' class="form-control" id="location" onChange={this.handleChange} /></td>
-                                    <td><input type="number" name="experience2" placeholder='Experience' class="form-control" id="location" onChange={this.handleChange} /></td>
-                                </tr>
-                                <tr>
-                                    <td><input type="text" name="skill3" placeholder='Name' class="form-control" id="location" onChange={this.handleChange} /></td>
-                                    <td><input type="text" name="type3" placeholder='Type' class="form-control" id="location" onChange={this.handleChange} /></td>
-                                    <td><input type="number" name="experience3" placeholder='Experience' class="form-control" id="location" onChange={this.handleChange} /></td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                    
-                    
-                    <div className="row">
-                        <div className='col-md-12'>
-                        <button type="submit" onClick={this.onSubmit} class="btn btn-primary">Submit</button>             
-                        </div>           
                     </div>
 
+                    <br />
+
+                    <div className="row">
+                        <div className="col-1"></div>
+                        <div className="col-11">
+
+                            <table className="table">
+                                <thead className="thead-dark">
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Phone</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {
+                                      
+                                       //filter((vacancy) => vacancy.reportingCompany.email == this.state.reportingCompany.email)
+                                        this.state.vacancies.map(
+                                            vacancy =>                               
+                                                <tr key={vacancy.uuid}>
+                                                    <td>{this.state.rowCount++}</td>
+                                                    <td>{vacancy.name}</td>
+                                                    <td>{vacancy.email}</td>
+                                                    <td>{vacancy.phone}</td>
+                                                </tr>
+                                                
+                                        )
+                                    }
+
+                                </tbody>
+                            </table>
+
+                        </div>
+                        <div className="col-2"></div>
+                    </div>
+                  
                 </div>
 
             </div>
@@ -216,4 +204,4 @@ class CandidateProfile extends Component {
     }
 }
 
-export default CandidateProfile;
+export default AdminViewCompanies;

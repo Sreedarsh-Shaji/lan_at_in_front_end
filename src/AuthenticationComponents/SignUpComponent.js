@@ -49,6 +49,11 @@ class SignUpComponent extends Component {
                                         onClick={() => this.userSelect("User")} />
                                     User
                                 </label>
+                                <label className="btn btn-primary" style={{ width: "100px" }}>
+                                    <input type="radio" name="options" id="option3" style={{ width: "100%" }}
+                                        onClick={() => this.userSelect("User")} />
+                                    Student
+                                </label>
                             </div>
 
                             {this.state.usertype === "Company" && <CompanySignup />}

@@ -23,21 +23,20 @@ class CandidateLogin extends Component {
         const { history } = this.props;
 
         let requestBody = {
-            email:this.state.username,
+            username:this.state.username,
             password:this.state.password,
         };
         
         AuthenticationDataService.candidateLogin(requestBody)
         .then((response) => { 
-                console.log(` Returned post login ${requestBody} `);
-                AuthenticationService.registerSuccessfulUserLogin(response.data);  
-                if(response.data == null)
+                AuthenticationService.registerSuccessfulUserLogin(response.data); 
+                if(response.data.email == null)
                 {
                     this.setState({error:"Invalid credentials"})
                 } 
                 else{  
                     this.setState({error:"Valid credentials"})
-                    //history.push('/user/home');
+                    history.push('/Candidate/Vacancies');
                 }
                 console.log(response.data) })
         .catch(  

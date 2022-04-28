@@ -10,13 +10,13 @@ class Header extends Component {
         return(
             <header>
                <nav className="navbar navbar-expand-md navbar-dark bg-dark">
-                   <div><a href="#" className="navbar-brand">Dashboard</a></div>
+                   <div><Link to="/Admin/Home" className="navbar-brand">Dashboard |</Link></div>
                    <ul className="navbar-nav">
-                        {isAdminLogin && <li><Link to="/Admin/Home"  className="nav-link">Home</Link></li>}
-                        {isAdminLogin && <li><Link to="/Admin/All-users"  className="nav-link">Comapnies</Link></li>}
+                        {isAdminLogin && <li><Link to="/Admin/View-all-companies"  className="nav-link">Companies</Link></li>}
                         {isAdminLogin && <li><Link to="/Admin/View-all-recruiters"  className="nav-link">Recruiters</Link></li>}
                         {isAdminLogin && <li><Link to="/Admin/View-all-vacancies"  className="nav-link">Vacancies</Link></li>}
                         {isAdminLogin && <li><Link to="/Admin/View-all-job-seekers"  className="nav-link">Job Seekers</Link></li>}
+                        {isAdminLogin && <li><Link to="/Admin/Careers"  className="nav-link">Careers</Link></li>}
                    </ul>
    
                    <ul  className="navbar-nav navbar-collapse justify-content-end">

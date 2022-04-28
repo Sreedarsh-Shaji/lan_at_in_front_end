@@ -12,13 +12,12 @@ class Header extends Component {
         return(
             <header>
                <nav className="navbar navbar-expand-md navbar-dark bg-dark">
-                   <div><a href="#" className="navbar-brand">Dashboard</a></div>
+                   <div>{isCompanyLoggedIn && <Link to="/Candidate/Vacancies" className="navbar-brand">Dashboard</Link>}</div>
                    <ul className="navbar-nav">
-                       {isCompanyLoggedIn && <li><Link to="/Agency/Home"  className="nav-link">Home</Link></li>}
-                       {isCompanyLoggedIn && <li><Link to="/Agency/Offices"  className="nav-link">Vacancies</Link></li>}
-                       {isCompanyLoggedIn && <li><Link to="/Agency/vehicles"  className="nav-link">Applied Vacancies</Link></li>}
-                       {isCompanyLoggedIn && <li><Link to="/Agency/trips"  className="nav-link">Interview Invites</Link></li>}
-                       {isCompanyLoggedIn && <li><Link to="/Agency/trips"  className="nav-link">Interview Results</Link></li>}
+                       {isCompanyLoggedIn && <li><Link to="/Candidate/Vacancies" className="nav-link">Vacancies</Link></li>}
+                       {isCompanyLoggedIn && <li><Link to="/Candidate/see-applied-positions" className="nav-link">Applied Vacancies</Link></li>}
+                       {isCompanyLoggedIn && <li><Link to="/Candidate/see-interview-invites" className="nav-link">Interview Invites</Link></li>}
+                       {isCompanyLoggedIn && <li><Link to="/Candidate/see-profile" className="nav-link">Profile</Link></li>}
                    </ul>
                    <ul  className="navbar-nav navbar-collapse justify-content-end">
                         {!isCompanyLoggedIn && <li><Link to="/login" className="nav-link">Login</Link></li>}
