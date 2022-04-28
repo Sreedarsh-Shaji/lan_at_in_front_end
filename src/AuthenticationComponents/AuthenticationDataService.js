@@ -139,6 +139,11 @@ companySignup(data){
     return ret;
 }
 
+adminAddCareerPath(data){
+    let ret = axios.post(`${this.companyURL}career/save`,data);
+    return ret;
+}
+
 candidateSignup(data){
     let ret = axios.post(`${this.userURL}/api/v1/userAuth/signup-user`,data);
     return ret;
@@ -206,6 +211,11 @@ companyRegisterVacancy(data)
 getCompanyVacancies()
 {
     return axios.get(`${this.companyURL}hiring/get-all-vacancies`) ;
+}
+
+getAllCompanies()
+{
+    return axios.get(`${this.companyURL}Admin/view-all-companies`) ;
 }
 
 getAllStudents()

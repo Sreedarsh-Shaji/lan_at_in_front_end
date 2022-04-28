@@ -80,7 +80,8 @@ class MainRoutes extends Component {
                         <Route path="/Admin/View-all-recruiters" component={AdminViewRecruiters}/>
                         <Route path="/Admin/View-all-vacancies" component={AdminViewVacancies}/>
                         <Route path="/Admin/View-all-job-seekers" component={AdminViewAllJobSeekers}/>
-                        <Route path="/Admin/Careers" component={AdminCareerPath}/>
+                        <Route path="/Admin/View-all-companies" component={AdminViewCompanies}/>
+                        <Route path="/Admin/add-career-path" component={AdminAddCareerPath}/>
 
                         
 

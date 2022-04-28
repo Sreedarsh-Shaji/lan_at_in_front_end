@@ -139,7 +139,8 @@ class AdminViewRecruiters extends Component {
                                         <th scope="col">Name</th>
                                         <th scope="col">Official Email</th>
                                         <th scope="col">Phone</th>
-                                        <th scope="col">Comapny Email</th>
+                                        <th scope="col">Company</th>
+                                        <th scope="col">Company Mail</th>
 
                                     </tr>
                                 </thead>
@@ -148,7 +149,7 @@ class AdminViewRecruiters extends Component {
                                       
                                        //
                                         this.state.recruiters
-                                        .filter((recruiter) => recruiter.company.email == this.state.presentCompay.email)
+                                        //.filter((recruiter) => recruiter.company.email == this.state.presentCompay.email)
                                         .map(
                                             recruiter =>                               
                                                 <tr key={recruiter.uuid}>
@@ -157,6 +158,7 @@ class AdminViewRecruiters extends Component {
                                                     <td>{recruiter.name}</td>
                                                     <td>{recruiter.email}</td>
                                                     <td>{recruiter.phone}</td>
+                                                    <td>{recruiter.company.name}</td>
                                                     <td>{recruiter.company.email}</td>
                                                 </tr>
                                                 
