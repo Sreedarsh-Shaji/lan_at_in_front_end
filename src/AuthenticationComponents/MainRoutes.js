@@ -35,6 +35,8 @@ import AdminViewVacancies from '../AdminAccount/AdminViewVacancies';
 import AdminViewAllJobSeekers from '../AdminAccount/AdminViewAllJobSeekers';
 import AdminViewCompanies from '../AdminAccount/AdminViewCompanies';
 import AdminCareerPath from '../AdminAccount/AdminCareerPath';
+import AdminAddCareerPath from '../AdminAccount/AdminAddCareerPath';
+import RecruiterSeeInterviewSchedule from '../RecruiterComponents/RecruiterSeeInterviewSchedule';
 
 class MainRoutes extends Component {
     render() {
@@ -72,6 +74,7 @@ class MainRoutes extends Component {
                         <Route path="/Recruiter/Home" component={RecruiterHome}/>
                         <Route path="/Recruiter/vacancies" component={RecruiterVacancies}/>
                         <Route path="/Recruiter/applicant-list" component={RecruiterGetApplicantList}/>
+                        <Route path="/Recruiter/interview-schedules" component={RecruiterSeeInterviewSchedule}/>
 
 
                         { /* Admin components */ }

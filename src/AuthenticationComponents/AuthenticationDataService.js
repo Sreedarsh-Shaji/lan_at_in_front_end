@@ -161,7 +161,7 @@ companyLogin(data)
 recruiterLogin(data)
 {
     console.log(data);
-    let ret = axios.post(this.companyURL+'company/login',data);
+    let ret = axios.post(this.companyURL+'recruiter/login',data);
     sessionStorage.setItem('authenticatedRecruiter',ret);
     console.log("Register successful recruiter login");
     new Cookies().set('Recruiter', data, { path: '/' });
@@ -182,6 +182,13 @@ candidateApplyForVacancy(data)
 {
     console.log(" in candidateApplyForVacancy() : "+data);
     let ret = axios.post(`${this.userURL}/api/v1/userApply/apply`,data);
+    return ret;
+}
+
+candidateUpdateProfile(mail,data)
+{
+    console.log(" in candidateUpdateProfile() : "+data);
+    let ret = axios.post(`${this.userURL}/Candidate/profile/update-by-mail?mail=${mail}`,data);
     return ret;
 }
 
@@ -248,6 +255,11 @@ getAllApplicants()
 getInvitedApplicants()
 {
     return axios.get(`${this.companyURL}Company/invites/get-all-invited`) ;
+}
+
+getInvitedApplicantsByMailId(mail)
+{
+    return axios.get(`${this.companyURL}api/v1/userApply/get-all-invited?mail=${mail}`) ;
 }
 
 getApplicantByMailId(mail)

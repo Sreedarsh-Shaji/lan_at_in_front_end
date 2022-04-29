@@ -36,9 +36,11 @@ class RecruiterLogin extends Component {
         .then((response) => { 
                 AuthenticationService.registerSuccessfulCompanyLogin(response.data);  
                 console.log(new Cookies().get('Recruiter'));
-                if(response.data == null)
+                console.log(response.data);
+                if(response.data.email == null)
                 {
-                    this.setState({error:"Invalid credentials"})
+                    this.setState({error:"Invalid credentials"});
+                    alert("Invalid credentials");
                 } 
                 else{  
                     this.setState({error:"Valid credentials"});

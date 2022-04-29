@@ -21,7 +21,7 @@ class Header extends Component {
                    </ul>
                    <ul  className="navbar-nav navbar-collapse justify-content-end">
                         {!isCompanyLoggedIn && <li><Link to="/login" className="nav-link">Login</Link></li>}
-                        {isCompanyLoggedIn &&  <li><Link to="/home" className="nav-link"  onClick={AuthenticationService.companyLogout}>Logout <br/><small>{ new Cookies().get('Jobseeker').email} </small></Link></li>}
+                        {isCompanyLoggedIn &&  <li><Link to="/login" className="nav-link"  onClick={AuthenticationService.companyLogout}>Logout <br/><small>{ new Cookies().get('Jobseeker').email} </small></Link></li>}
                    </ul>
                </nav>
             </header> 

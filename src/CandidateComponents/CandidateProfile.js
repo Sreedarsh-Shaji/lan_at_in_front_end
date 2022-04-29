@@ -94,10 +94,6 @@ class CandidateProfile extends Component {
         const { history } = this.props;
 
         let requestBody = {
-
-            role: this.state.role,
-            description: this.state.description,
-            linkedInProfile: this.state.linkedInProfile,
             qualification: [
                 { course: this.state.course1, startingYear: this.state.startingYear1, endingYear: this.state.endingYear1 },
                 { course: this.state.course2, startingYear: this.state.startingYear2, endingYear: this.state.endingYear2 },
@@ -107,19 +103,14 @@ class CandidateProfile extends Component {
                 { skillName: this.state.skill1, skillType: this.state.type1, yearsOfExperience: this.state.experience1 },
                 { skillName: this.state.skill2, skillType: this.state.type2, yearsOfExperience: this.state.experience2 },
                 { skillName: this.state.skill3, skillType: this.state.type3, yearsOfExperience: this.state.experience3 },
-            ],
-            locationOfEmployment: this.state.employmentLocation,
-            modeOfEmployment: this.state.modeOfEmployment,
-            shouldPossesPassport: this.state.shouldPossessPassport,
-            willingToRelocate: this.state.willingToRelocate,
-            reportingCompany: new Cookies().get('Company'),
+            ]
         }
 
         console.log(requestBody);
         console.log(AuthenticationService.getPresentCompany())
 
 
-        AuthenticationDataService.companyRegisterVacancy(requestBody)
+        AuthenticationDataService.candidateUpdateProfile(new Cookies().get('Jobseeker').username,requestBody)
             .then((response) => {
                 if (response.data == null) {
                     alert("Invalid credentials");
@@ -128,7 +119,7 @@ class CandidateProfile extends Component {
                 else {
                     alert("Added vacancy successfully successfully");
                     this.setState({ message: "Valid credentials" })
-                    history.push('/Agency/vehicles');
+                    history.push('/Candidate/see-profile');
                 }
                 console.log(response.data)
             })

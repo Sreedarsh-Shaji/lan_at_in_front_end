@@ -7,9 +7,11 @@ import AuthenticationDataService from '../AuthenticationComponents/Authenticatio
 import AuthenticationService from '../AuthenticationComponents/AuthenticationService';
 
 import Cookies from 'universal-cookie';
-import { Link } from 'react-router-dom';
+import ApplicantProfile from './ApplicateProfile';
+import InviteForInterview from './InviteForInterview';
 
-class CandidateViewInterviewInvites extends Component {
+
+class RecruiterSeeInterviewSchedule extends Component {
 
     constructor(props) {
         super(props)
@@ -17,8 +19,10 @@ class CandidateViewInterviewInvites extends Component {
         this.state = {
 
             modelAction: 'Add',
-            data: [],
-            presentCompay: new Cookies().get('Jobseeker'),
+            applicants: [],
+
+            viewProfile : false,
+            updateInvite:false,
 
             role: '',
             description: '',
@@ -46,20 +50,38 @@ class CandidateViewInterviewInvites extends Component {
             willingToRelocate: '',
             linkedInProfile: '',
 
-            rowCount:1,
-
-
+            rowCount: 1,
+            presentCompay: new Cookies().get('Company'),
+            selectedMail: 'AswinS@gmail.com',
+            profile:'',
         };
 
         this.onSubmit = this.onSubmit.bind(this);
         this.openModal = this.openModal.bind(this);
         this.handleChange = this.handleChange.bind(this);
-        this.loadData =  this.loadData.bind(this);
-
+        this.loadData = this.loadData.bind(this);
+        this.viewIndividualProfile = this.viewIndividualProfile.bind(this)
+        this.sendInvite = this.sendInvite.bind(this);
     }
 
-    openModal = () => this.setState({ isOpen: true });
+    openModal = () => {
+        
+        this.setState({ isOpen: true })
+    };
     closeModal = () => this.setState({ isOpen: false });
+
+    viewIndividualProfile = (mailId) => {
+        this.setState({ selectedMail: mailId });
+        this.setState( { viewProfile: true , viewIndividualProfile:false } );
+        this.openModal();
+    }
+
+    sendInvite = (profile) => {
+        this.setState({ profile: profile });
+        this.setState( { viewProfile: false , viewIndividualProfile:true } );
+        this.openModal();
+    }
+
 
     componentDidMount() {
         this.loadData();
@@ -67,13 +89,12 @@ class CandidateViewInterviewInvites extends Component {
 
     loadData() {
 
-            console.log("Candidate get list component did mount");
-            AuthenticationDataService.getInvitedApplicantsByMailId(new Cookies().get('Jobseeker').username).
-                then(response => {
-                    this.setState({ data: response.data })
-                    console.log(response.data)
-                })
-
+        console.log("Company get applicant list component did mount");
+        AuthenticationDataService.getInvitedApplicants().
+            then(response => {
+                this.setState({ applicants: response.data })
+                console.log(response.data)
+            })
 
     }
 
@@ -116,7 +137,7 @@ class CandidateViewInterviewInvites extends Component {
                 else {
                     alert("Added vacancy successfully successfully");
                     this.setState({ message: "Valid credentials" })
-                    history.push('/Agency/vehicles');
+                    history.push('/Company/Vacancies');
                 }
                 console.log(response.data)
             })
@@ -139,12 +160,13 @@ class CandidateViewInterviewInvites extends Component {
                     <div className="row">
                         <div className="col">
                             <br />
-                            <h3 style={{ textAlign: "center" }}>Interview Invites</h3>
+                            <h3 style={{ textAlign: "center" }}>Interview List</h3>
                         </div>
                     </div>
                     <div className="row">
                         <div className="col-1"></div>
                         <div className="col-2">
+
                         </div>
                     </div>
 
@@ -154,42 +176,53 @@ class CandidateViewInterviewInvites extends Component {
                         <div className="col-1"></div>
                         <div className="col-11">
 
-                            <table className="table">
+                        <table className="table">
                                 <thead className="thead-dark">
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">Company</th>
+                                        <th scope="col">Applicant</th>
                                         <th scope="col">Role</th>
-                                        <th scope="col">Date and Time</th>
-                                        <th scope="col">Description</th>
-                                        <th></th>
+                                        <th scope="col">Schedule date time</th>
+                                        <th scope="col">Meeting Details</th>
+                                        {/* <th scope="col">Location</th>
+                                        <th scope="col">Mode of Employement</th> */}
 
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {
-                                       
-                                       this.state.data
-                                       .map(
-                                           app =>
-                                               <tr key={app.uuid}>
-                                                   <td>{this.state.rowCount++}</td>
-                                                   <td>{app.applicationProfile.profile.reportingCompany.name}</td>
-                                                   <td>{app.applicationProfile.profile.role}</td>
-                                                   <td>{app.dateAndTimeOfInterview}</td>
-                                                   <td>{app.meetingDetails}</td>
-                                                   </tr>
 
-                                       )
+
+                                        this.state.applicants
+                                            //.filter((applicant) => ApplicantList.reportingCompany.email == this.state.presentCompay.email)
+                                            .map(
+                                                app =>
+                                                    <tr key={app.uuid}>
+                                                        <td>{this.state.rowCount++}</td>
+                                                        <td>{app.applicationProfile.jobseeker.email}</td>
+                                                        <td>{app.applicationProfile.profile.role}</td>
+                                                        <td>{app.dateAndTimeOfInterview}</td>
+                                                        <td>{app.meetingDetails}</td>
+                                                        </tr>
+
+                                            )
                                     }
 
                                 </tbody>
                             </table>
 
+
                         </div>
                         <div className="col-2"></div>
                     </div>
-                    
+                    <Modal show={this.state.isOpen}>
+                        <Modal.Header closeButton onClick={this.closeModal}></Modal.Header>
+                        <Modal.Body>
+                        {
+                            this.state.viewProfile == true ? <ApplicantProfile mail={this.state.selectedMail}/> : <InviteForInterview profiledata={this.state.profile}/>
+                        }
+                        </Modal.Body>
+                    </Modal>
                 </div>
 
             </div>
@@ -197,4 +230,4 @@ class CandidateViewInterviewInvites extends Component {
     }
 }
 
-export default CandidateViewInterviewInvites;
+export default RecruiterSeeInterviewSchedule;
