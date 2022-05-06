@@ -4,9 +4,9 @@ import Cookies from 'universal-cookie';
 
 class AuthenticationDataService{
 
-    companyURL = "http://localhost:8080/";
-    userURL =    "http://localhost:8080";
-    recruiterURL =    "http://localhost:8080";
+    companyURL = "http://54.234.117.216:8080/";
+    userURL =  "http://54.234.117.216:8080";
+    recruiterURL =  "http://54.234.117.216:8080";
    
     adminLogin(username,password){
         return axios.get(`${this.companyURL}Admin/login/${username}/${password}`);
