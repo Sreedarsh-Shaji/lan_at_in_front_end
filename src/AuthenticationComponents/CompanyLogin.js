@@ -32,6 +32,27 @@ class CompanyLogin extends Component {
               
         }
 
+        alert(  );
+
+        if( this.state.email.length == 0 ) {
+            this.setState({error:"email should not be empty!"});
+        }
+        else if( this.state.email.indexOf('@') < 0  || this.state.email.indexOf('.') < 0 )
+        {
+            this.setState({error:"email should contain @ and ."});
+        }
+        else if( this.state.email.lastIndexOf('.') - this.state.email.indexOf('@') < 3 )
+        {
+            this.setState({error:"The domain associated with mail should be longer"});
+        }
+        else if(this.state.email.substring(this.state.email.indexOf('.')+1).length <2){
+            this.setState({error:"extension of mail id should be greater than 2"});
+        }
+        else if ( this.state.password.length == 0 ) {
+            this.setState({error:"Password should not be empty!"});
+        }
+
+        else{
         AuthenticationDataService.companyLogin(requestBody)
         .then((response) => { 
                 console.log(response.data);
@@ -52,6 +73,7 @@ class CompanyLogin extends Component {
             console.log(err)
             this.setState({error:"Invalid credentials"})
         } )
+    };
     }
 
 
@@ -69,7 +91,7 @@ class CompanyLogin extends Component {
             <div className="container">
 
                 <div className="row">
-                    <div className="col-md-6">
+                    <div className="col-md-12">
 
                         {this.state.error && <div className="alert alert-danger" role="alert">
                             {this.state.error}

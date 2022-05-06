@@ -37,6 +37,9 @@ import AdminViewCompanies from '../AdminAccount/AdminViewCompanies';
 import AdminCareerPath from '../AdminAccount/AdminCareerPath';
 import AdminAddCareerPath from '../AdminAccount/AdminAddCareerPath';
 import RecruiterSeeInterviewSchedule from '../RecruiterComponents/RecruiterSeeInterviewSchedule';
+import StudentHome from '../StudentComponents/StudentHome';
+import GetCareerPath from '../StudentComponents/GetCareerPath';
+import SeeSavedCareerPaths from '../StudentComponents/SeeSavedCareerPaths';
 
 class MainRoutes extends Component {
     render() {
@@ -87,13 +90,10 @@ class MainRoutes extends Component {
                         <Route path="/Admin/add-career-path" component={AdminAddCareerPath}/>
 
                         
-
-
-                        {/* User componets*/}
-
-                        <Route path="/User/Home" component={UserHome}/>
-                        <Route path="/User/Office" component={ViewOffice}/>
-                        <Route path="/User/Trips" component={ViewUserTrips}/>
+                        {/* Student components*/}
+                        <Route path="/Student/Home" component={StudentHome}/>
+                        <Route path="/Student/Career-path" component={GetCareerPath}/>
+                        <Route path="/Student/see-career-path" component={SeeSavedCareerPaths}/>
 
                     </Switch>
                 </Router>

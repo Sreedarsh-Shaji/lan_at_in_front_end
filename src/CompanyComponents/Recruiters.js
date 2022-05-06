@@ -41,7 +41,7 @@ class Recruiters extends Component {
     }
 
     loadData() {
-
+        this.setState({  rowCount:1 });
         console.log("Company home component did mount");
         AuthenticationDataService.getRecruitersByCompany().
             then(response => {
@@ -78,22 +78,47 @@ class Recruiters extends Component {
             company: new Cookies().get('Company'),
         }
 
-        console.log("Payload");
-        console.log( requestBody);
-        console.log("Present Company");
-        console.log( AuthenticationService.getPresentCompany())
-
-
+        if(this.state.name.length <=0 || this.state.password.length <= 0 || this.state.email <= 0 || this.state.phone<= 0){
+            alert(" All fields are mandatory ");
+        }
+        else if(! /^[a-zA-Z0-9@._]{5,50}/.test(this.state.password)){
+            alert(" Password can be alpha neumeric and may contain @ . and _ . Should be between 5 and 50 characters long");
+        }
+        else if(! /^[a-zA-Z.]{4,10}/.test(this.state.name)){
+            alert("Name should contain uppercase and lowercase characters and . operator \n Name should contain minimum 4 characters and maximum 20 characters")
+        }
+        else if( this.state.email.indexOf('@') < 0  || this.state.email.indexOf('.') < 0 )
+        {
+           alert("email should contain @ and .");
+        }
+        else if( this.state.email.lastIndexOf('.') - this.state.email.indexOf('@') < 3 )
+        {
+           alert("The domain associated with mail should be longer");
+        }
+        else if(this.state.email.substring(this.state.email.indexOf('.')+1).length <2){
+            alert("extension of mail id should be greater than 2");
+        }
+        else if(this.state.phone.length != 10){
+            alert("Accepts only 10 number mobile number");
+        }
+        else if(! /^[0-9]{10}/.test(this.state.phone)){
+            alert("Accepts only 10 number mobile number");
+        }
+        else if(this.state.phone.charAt(0) != '9' || 
+                this.state.phone.charAt(0) != '8' || 
+                this.state.phone.charAt(0) != '7' ||
+                this.state.phone.charAt(0) != '6'){
+            alert("Mobile number must start with numbers 6 to 9");
+        }
+        else{
         AuthenticationDataService.saveRecruitersByCompany(requestBody)
             .then((response) => {
-                if (response.data == null) {
-                    alert("Invalid credentials");
-                    this.setState({ message: "Invalid credentials" })
+                if (response.data == "saved") {
+                    alert(response.data);
                 }
                 else {
-                    alert("Added vacancy successfully successfully");
-                    this.setState({ message: "Valid credentials" })
-                    history.push('/Company/Vacancies');
+                    alert(response.data);
+                    this.loadData();
                 }
                 console.log(response.data)
             })
@@ -102,9 +127,11 @@ class Recruiters extends Component {
                     console.log(err)
                     this.setState({ error: "Invalid credentials" })
                 })
+        }
     }
     handleChange(event)//This is a synthetic event
     {
+        this.setState({  rowCount:1 });
         this.setState({ [event.target.name]: event.target.value });
     }
     render() {
@@ -142,6 +169,7 @@ class Recruiters extends Component {
                                         <th scope="col">Name</th>
                                         <th scope="col">Email</th>
                                         <th scope="col">Phone</th>
+                                        <th scope="col">Company Mail</th>
 
                                     </tr>
                                 </thead>
@@ -153,8 +181,8 @@ class Recruiters extends Component {
                                         .filter((recruiter) => recruiter.company.email == this.state.presentCompay.email)
                                         .map(
                                             recruiter =>                               
-                                                <tr key={recruiter.uuid}>
-                                                    <td>{this.state.rowCount++}</td>
+                                                <tr key={recruiter.uid}>
+                                                    <td></td>
                                                     <td>{recruiter.role}</td>
                                                     <td>{recruiter.name}</td>
                                                     <td>{recruiter.email}</td>
@@ -191,7 +219,7 @@ class Recruiters extends Component {
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Phone Number</label>
-                                <input type="text" name="phone" class="form-control" id="location" onChange={this.handleChange} />
+                                <input type="number" name="phone" class="form-control" id="location" onChange={this.handleChange} />
                             </div>
                             {/* <div class="form-group">
                                     <label for="exampleInputEmail1">Office</label>

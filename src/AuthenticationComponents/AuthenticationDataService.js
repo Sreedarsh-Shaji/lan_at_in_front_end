@@ -155,6 +155,7 @@ companyLogin(data)
     console.log(data);
     let ret = axios.post(this.companyURL+'company/login',data);
     AuthenticationService.registerSuccessfulCompanyLogin(ret);
+    new Cookies().set('Company', data, { path: '/' });
     return ret;
 }
 
@@ -175,6 +176,16 @@ candidateLogin(data)
     sessionStorage.setItem('authenticatedJobseeker',ret);
     console.log("Register successful candidate login");
     new Cookies().set('Jobseeker', data, { path: '/' });
+    return ret;
+}
+
+studentLogin(data)
+{
+    console.log(" in student login : "+data);
+    let ret = axios.post(`${this.userURL}/api/v1/studentAuth/login-user`,data);
+    sessionStorage.setItem('authenticatedStudent',ret);
+    console.log("Register successful student login");
+    new Cookies().set('Student', data, { path: '/' });
     return ret;
 }
 
@@ -282,6 +293,38 @@ saveCareerPath(data)
 {
     return axios.post(`${this.companyURL}career/save`,data);
 }
+
+getPlusTwo()
+{
+    return axios.get(`${this.companyURL}api/v1/studentPath/get-all-plustwo`);
+}
+
+getGraduation(data)
+{
+    return axios.get(`${this.companyURL}api/v1/studentPath/get-all-graduation?plus2=${data}`);
+}
+
+getPostGraduation(p2,grad)
+{
+    return axios.get(`${this.companyURL}api/v1/studentPath/get-all-pg?plus2=${p2}&grad=${grad}`);
+}
+
+getRole(p2,grad,pg)
+{
+    return axios.get(`${this.companyURL}api/v1/studentPath/get-all-paths?plus2=${p2}&grad=${grad}&pg=${pg}`);
+}
+
+studentCareerPath(data)
+{
+    return axios.post(`${this.companyURL}api/v1/studentPath/save-career-path`,data);
+}
+
+studentSeeSavedPath(data)
+{
+    return axios.get(`${this.companyURL}api/v1/studentPath/get-by-id?email=${data}`);
+}
+
+
 
 }
 

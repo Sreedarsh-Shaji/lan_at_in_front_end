@@ -6,6 +6,7 @@ import CompanyLogin from './CompanyLogin';
 import RecruiterLogin from './RecruiterLogin';
 import FooterComponent from './FooterComponent';
 import Header from '../LandingPage/Header';
+import StudentLogin from './StudentLogin';
 
 class LoginComponent extends Component {
 
@@ -28,7 +29,7 @@ class LoginComponent extends Component {
                     <div className="row">
                         <div className="col-md-12">
                             <br />
-                            <h1 style={{ textAlign: "center" }}>Login  {this.state.usertype}</h1>
+                            <h1 style={{ textAlign: "center" }} className=" p-3 mb-2 bg-primary text-white">Login  {this.state.usertype}</h1>
                             <br />
                         </div>
                     </div>
@@ -92,7 +93,7 @@ class LoginComponent extends Component {
                             {this.state.usertype === "Company" && <CompanyLogin />}
                             {this.state.usertype === "Candidate" && <CandidateLogin />}
                             {this.state.usertype === "Recruiter" && <RecruiterLogin /> }
-                            {this.state.usertype === "Student" && <RecruiterLogin /> }
+                            {this.state.usertype === "Student" && <StudentLogin /> }
 
                         </div>
                     </div>

@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
 import AuthenticationDataService from "./AuthenticationDataService"
 import AuthenticationService from './AuthenticationService';
+import CompanyHomePage from '../CompanyComponents/CompanyHome'
 import { withRouter } from 'react-router';
 
-class AdminLogin extends Component {
+import Cookies from 'universal-cookie';
 
-    
-
+class StudentLogin extends Component {
+  
     constructor(props) {
         super(props)
 
         this.state = {
             username: '',
-            password: '',
-            error: false,
+            password: ''
         }
 
         this.onSubmit = this.onSubmit.bind(this);
@@ -24,25 +24,29 @@ class AdminLogin extends Component {
 
         const { history } = this.props;
 
-        if( this.state.username.length == 0 ) {
-            this.setState({error:"Username should not be empty!"});
-        }
-        else if ( this.state.password.length == 0 ) {
-            this.setState({error:"Password should not be empty!"});
+        
+        let requestBody ={
+            
+        username:this.state.username,
+        password:this.state.password,
+              
         }
 
-        else{
-        AuthenticationDataService.adminLogin(this.state.username, this.state.password)
+        AuthenticationDataService.studentLogin(requestBody)
         .then((response) => { 
-                AuthenticationService.registerSuccessfulAdminLogin(response.data); 
-                alert(response.data); 
-                if(response.data == "Valid credentials")
+                console.log(" Cookies :  "); 
+                console.log(new Cookies().get('Student'));
+                console.log(response.data);
+                if(response.data.email == null)
                 {
-                    this.setState({error:"Valid credentials"})
-                    history.push('/Admin/Home');
+                    this.setState({error:"Invalid credentials"});
+                    alert("Invalid credentials");
                 } 
                 else{  
-                    this.setState({error:"Invalid credentials"})
+                    this.setState({error:"Valid credentials"});
+                    console.log( response.data );
+                    alert("valid credentials");
+                    history.push('/Student/Home');
                 }
                 console.log(response.data) })
         .catch(  
@@ -52,11 +56,9 @@ class AdminLogin extends Component {
         } )
     }
 
-    }
-
 
     componentDidMount() {
-        console.log("Admin component did mount");
+        console.log("Company login component did mount");
     }
 
     handleChange(event)//This is a synthetic event
@@ -69,7 +71,7 @@ class AdminLogin extends Component {
             <div className="container">
 
                 <div className="row">
-                    <div className="col-md-12">
+                    <div className="col-md-6">
 
                         {this.state.error && <div className="alert alert-danger" role="alert">
                             {this.state.error}
@@ -84,7 +86,7 @@ class AdminLogin extends Component {
                             <label>Email address</label>
                             <input type="email" name="username" className="form-control" onChange={this.handleChange}
                                 placeholder="Enter email" />
-                            <small className="form-text text-muted">Admin username goes here</small>
+                            <small className="form-text text-muted">Your registered official email goes here</small>
                         </div>
 
                         <div className="form-group">
@@ -104,8 +106,7 @@ class AdminLogin extends Component {
             </div>
         );
     }
+
 }
 
-
-
-export default withRouter(AdminLogin);
+export default withRouter(StudentLogin);

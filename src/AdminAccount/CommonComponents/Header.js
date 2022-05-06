@@ -16,11 +16,10 @@ class Header extends Component {
                         {isAdminLogin && <li><Link to="/Admin/View-all-recruiters"  className="nav-link">Recruiters</Link></li>}
                         {isAdminLogin && <li><Link to="/Admin/View-all-vacancies"  className="nav-link">Vacancies</Link></li>}
                         {isAdminLogin && <li><Link to="/Admin/View-all-job-seekers"  className="nav-link">Job Seekers</Link></li>}
-                        {isAdminLogin && <li><Link to="/Admin/Careers"  className="nav-link">Careers</Link></li>}
+                        {isAdminLogin && <li><Link to="/Admin/add-career-path"  className="nav-link">Careers</Link></li>}
                    </ul>
    
                    <ul  className="navbar-nav navbar-collapse justify-content-end">
-                        
                         {!isAdminLogin && <li><Link to="/home" className="nav-link">Login</Link></li>}
                         {isAdminLogin &&  <li><Link to="/login" className="nav-link"   onClick={AuthenticationService.logout}>Logout</Link></li>}
                    </ul>
